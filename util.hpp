@@ -2,13 +2,11 @@
 #include <bits/stdc++.h>
 #include <cassert>
 #include <cstring>
-#include <sstream>
 
 using namespace std;
 using namespace NTL;
 
 std::string zToString(const ZZ &z) {
-	cout << "bugs" << endl;
     std::stringstream buffer;
     buffer << z;
     return buffer.str();
@@ -16,7 +14,7 @@ std::string zToString(const ZZ &z) {
 
 struct ZZHash {
     size_t operator()(const NTL::ZZ& key) const {
-        return std::hash<std::string>()(zToString(key));
+        return std::hash<std::string>()(strdup(zToString(key).c_str()));
     }
 };
 
@@ -98,13 +96,15 @@ ZZ discreteLog(ZZ a,ZZ b,ZZ m){
 		b %= m;
 
 		ZZ n = square_root(m) +ZZ(1);
+		cout << "=======" << endl;
 		ZZ an = modpowUtil1(a,n,m);
+		cout << "!!!!SSS!!!" << endl;
 		unordered_map<ZZ,ZZ,ZZHash, ZZEqual>vals;
 		for (ZZ q = ZZ(0), cur = b; q <= n; ++q){
 			vals[cur] = q;
 			cur = (cur * a) % m;
 		}
-
+		cout << "<<>>" << endl;
 		for (ZZ p = ZZ(1), cur = ZZ(1); p <= n; ++p){
 			cur = (cur * an) % m;
 			if (vals.count(cur)) {
@@ -112,5 +112,6 @@ ZZ discreteLog(ZZ a,ZZ b,ZZ m){
 				return ans;
 			}
 		}
+		cout << "!!!!!!!!!!!!!" << endl;
 		return ZZ(-1);
 }
