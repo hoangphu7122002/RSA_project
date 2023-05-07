@@ -10,7 +10,7 @@ int main() {
     //fermat attack
     attackRSA* attacker = new attackRSA();
     FILE* f1 = freopen("testcase/crt.txt","r",stdin);
-    // FILE* f2 = freopen("result/broadcastAttack.txt","w",stdout);
+    FILE* f2 = freopen("result/broadcastAttack.txt","w",stdout);
     string e;
     cin >> e;
     string n1;
@@ -42,6 +42,7 @@ int main() {
 
     attacker->crt(my_e,pairLst);
 
-    cout << "M: " << attacker->getM() << endl;
+    cout << "e: " << my_e << endl;
+    cout << "M^e: " << attacker->getM() << endl;
     return 0;
 }

@@ -6,24 +6,6 @@
 using namespace std;
 using namespace NTL;
 
-std::string zToString(const ZZ &z) {
-    std::stringstream buffer;
-    buffer << z;
-    return buffer.str();
-}
-
-struct ZZHash {
-    size_t operator()(const NTL::ZZ& key) const {
-        return std::hash<std::string>()(strdup(zToString(key).c_str()));
-    }
-};
-
-struct ZZEqual {
-    bool operator()(const NTL::ZZ& lhs, const NTL::ZZ& rhs) const {
-        return lhs == rhs;
-    }
-};
-
 ZZ gcdUtil1(ZZ a, ZZ b) {
 	while (b != 0) {
 		a %= b;
@@ -88,30 +70,4 @@ ZZ square_root(ZZ n) {
 		// cout << x << " " << y << endl;
 	}
 	return x;
-}
-
-//O(sqrt(M))
-ZZ discreteLog(ZZ a,ZZ b,ZZ m){
-		a %= m;
-		b %= m;
-
-		ZZ n = square_root(m) +ZZ(1);
-		cout << "=======" << endl;
-		ZZ an = modpowUtil1(a,n,m);
-		cout << "!!!!SSS!!!" << endl;
-		unordered_map<ZZ,ZZ,ZZHash, ZZEqual>vals;
-		for (ZZ q = ZZ(0), cur = b; q <= n; ++q){
-			vals[cur] = q;
-			cur = (cur * a) % m;
-		}
-		cout << "<<>>" << endl;
-		for (ZZ p = ZZ(1), cur = ZZ(1); p <= n; ++p){
-			cur = (cur * an) % m;
-			if (vals.count(cur)) {
-				ZZ ans = n * p - vals[cur];
-				return ans;
-			}
-		}
-		cout << "!!!!!!!!!!!!!" << endl;
-		return ZZ(-1);
 }

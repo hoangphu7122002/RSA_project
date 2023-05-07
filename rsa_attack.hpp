@@ -102,10 +102,10 @@ public:
 		}
 		assert(gcdUtil1(ae,info[0].m) == 1);
 		//solve problem: a^e === a1 (mod m1) to find a)
-		ZZ a1 = discreteLog(ae,info[0].a,info[0].m);
-		ZZ a2 = discreteLog(ae,info[1].a,info[1].m);
-		assert(a1 == a2);
-		this->M = a1;
+		// ZZ a1 = discreteLog(ae,info[0].a,info[0].m);
+		// ZZ a2 = discreteLog(ae,info[1].a,info[1].m);
+		// assert(a1 == a2);
+		this->M = ae;
 	}
 
 	//has n,e,d => to compute totient, give e_victim => d_victime
