@@ -51,7 +51,10 @@ Install [NTL library](https://libntl.org/doc/tour-unix.html) on your machine. if
 ```
 
 ### Usecase [3] some common RSA attacks
-Note: Since 4 attack methods are set up, but the way they work is the same, we only need to take an example set up for one attack. Ex: external Attack
+Note: Since 4 attack methods are set up such as:
+* a
+* b
+But the way they work is the same, we only need to take an example set up for one attack. Ex: external Attack
 #### Input file (write in genText/text.txt):
      
 #### Run thourgh makefile:
