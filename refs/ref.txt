@@ -1,0 +1,6 @@
+RSA tutorial: https://www.educba.com/rsa-algorithm/
+NTL tutorial with bigInts: https://libntl.org/doc/tour-ex1.html
+Number Theory Algorithm: https://cp-algorithms.com/algebra/primality_tests.html
+algorithm: https://vnoi.info/wiki/Home
+RSA Attack: https://drx.home.blog/2019/03/01/crypto-rsa/
+Makefile with VsCode: https://earthly.dev/blog/vscode-make/
