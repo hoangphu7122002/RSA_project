@@ -52,8 +52,12 @@ Install [NTL library](https://libntl.org/doc/tour-unix.html) on your machine. if
 
 ### Usecase [3] some common RSA attacks
 Note: Since 4 attack methods are set up such as:
-* a
-* b
+
+* External Attack (has same n, different e,c)
+* Internal Attack (has n,e,d => to compute totient, give e_victim => d_victime)
+* Fermat Attack (p,q close: abs(p - q) < n^1/4)
+* Broadcast Attack (same e, diff n, c)
+
 But the way they work is the same, we only need to take an example set up for one attack. Ex: external Attack
 #### Input file (write in genText/text.txt):
      
