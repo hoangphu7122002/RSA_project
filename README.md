@@ -49,3 +49,22 @@ Install [NTL library](https://libntl.org/doc/tour-unix.html) on your machine. if
 ── Makefile
 ── message.cpp
 ```
+
+### Usecase [3] some common RSA attacks
+Note: Since 4 attack methods are set up, but the way they work is the same, we only need to take an example set up for one attack. Ex: external Attack
+#### Input file (write in genText/text.txt):
+     
+#### Run thourgh makefile:
+     make message
+#### Output has some information such as (print in commandline):
+     - message read from input
+     - message decrypt
+#### File source:
+```bash
+── genText
+    └──asciiToText.py
+    └──res.txt
+    └──text.txt
+── Makefile
+── message.cpp
+```
