@@ -9,7 +9,16 @@ Install [NTL library](https://libntl.org/doc/tour-unix.html) on your machine. if
 * Implement from scratch some arithmetic related algorithms such as: power_mod, gcd, euler_gcd, chinese_remainder_theorem, rabin_miller test, ... to assist in the problem of the topic.
 
 ### Usecase [1]
-#### Input file contains 1 lines (write in input.txt):
-number of bits of prime number you want to generate (example: 512 bits, 1024 bits)
-#### Runcode
-make rsa     
+#### Input file (write in input.txt):
+     1 line: number of bits of prime number you want to generate (example: 512, 1024)
+#### Run thourgh makefile:
+     make rsa
+#### Output has some information such as:
+     - first frime number (p)
+     - second frime number (q)
+     - public key (e)
+     - private key (d)
+     - product of p,q (n)
+     - message random (m)
+     - encrypt of message (Encrypt)
+     - decrypt of message (Decrypt)
