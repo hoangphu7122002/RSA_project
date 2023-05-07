@@ -22,3 +22,10 @@ Install [NTL library](https://libntl.org/doc/tour-unix.html) on your machine. if
      - message random (m)
      - encrypt of message (Encrypt)
      - decrypt of message (Decrypt)
+#### File source:
+```bash
+── Makefile
+── input.txt
+── main.cpp
+── output.txt
+```
