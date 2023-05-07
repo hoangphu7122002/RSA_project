@@ -32,7 +32,8 @@ Install [NTL library](https://libntl.org/doc/tour-unix.html) on your machine. if
 
 ### Usecase [2]
 #### Input file (write in genText/text.txt):
-     You enter the text message you want to be decoded for example "Hello, I'm Nguyen Dac Hoang Phu" into this file, then run the file asciiToText.py in the same directory, the output will be file: res.txt and file This will be the input of the program
+     You enter the text message you want to be decoded for example "Hello, I'm Nguyen Dac Hoang Phu" into this file
+     Then run the file asciiToText.py in the same directory, the output will be file: res.txt and file This will be the input of the program
 #### Run thourgh makefile:
      make rsa
 #### Output has some information such as:
