@@ -10,4 +10,6 @@ Install [NTL library](https://libntl.org/doc/tour-unix.html) on your machine. if
 
 ### Usecase [1]
 #### Input file contains 1 lines (write in input.txt):
-      number of bits of prime number you want to generate (example: 512 bits, 1024 bits)
+number of bits of prime number you want to generate (example: 512 bits, 1024 bits)
+#### Runcode
+make rsa     
