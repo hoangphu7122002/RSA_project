@@ -85,3 +85,10 @@ But the way they work is the same, we only need to take an example set up for on
     ...
 ── rsa_attack.hpp
 ```
+### Conclusion
+Thourgh project, Team understand deep in RSA mechansim such as: genKey algorithm, encrypt, decrypt,... Besides, team have more arithmetic knowledge and was able to apply it to programming. We hope this open-source may be of help to those who are initially learning about RSA and its related mechanisms.
+
+### Future Work
+* Learn more about implementing Hash, MAC, and implementing digital signature applications with the above base fields have been decrypted depending on attack needs
+* Take from scratch to better understand the mechanism in DES, AES encryption
+* Package the app and deploy it to another platform
