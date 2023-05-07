@@ -5,6 +5,7 @@
 
 using namespace NTL;
 using namespace std;
+using namespace std::chrono;
 
 string convertString(ZZ num) {
     NTL::ZZ newNum = ZZ(0);
@@ -48,12 +49,20 @@ int main() {
     string my_m;
     cin >> my_m;
     
+	std::chrono::time_point<std::chrono::system_clock> start, end;
+	double elapsed_seconds;
+
 	ZZ m(NTL::INIT_VAL, my_m.c_str());;
 	cout << "m: " << m << endl;
+	start = std::chrono::system_clock::now();
 	ZZ c = rsa_gen->encrypt(m);
     ZZ text_descrypt = rsa_gen->decrypt(c);
 	// cout << "Encrypt:" << c << "\n";
 	// cout << "Decrypt:" << text_descrypt << "\n";
+	end = std::chrono::system_clock::now();
+
+	elapsed_seconds = duration_cast<microseconds> (end - start).count() * pow(10, -6);
+	cout << "time Encrypt Decrypt Process: " << elapsed_seconds << endl;
     cout << "Message:" << convertString(text_descrypt) << "\n";
 	return 0;
 }
