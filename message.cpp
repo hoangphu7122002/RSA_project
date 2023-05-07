@@ -6,9 +6,23 @@
 using namespace NTL;
 using namespace std;
 
+string convertString(ZZ num) {
+    NTL::ZZ newNum = ZZ(0);
+    string res = "";
+    while (num > 0) {
+        NTL::ZZ digit = num % ZZ(1000);
+        num /= ZZ(1000);
+        int tempNum = conv<int>(digit);
+        res = static_cast<char>(tempNum) + res; 
+    }
+
+    return res;
+}
+
+
 int main() {
-	FILE* f1 = freopen("input.txt","r",stdin);
-	FILE* f2 = freopen("output.txt","w",stdout);
+	FILE* f1 = freopen("genText/res.txt","r",stdin);
+	// FILE* f2 = freopen("output.txt","w",stdout);
 	int bits;
 	cin >> bits;
 	//cout << "BEGIN GET GO" << endl;
@@ -26,18 +40,21 @@ int main() {
 
 	ZZ n = rsa_gen->getN();
 
-	cout << "p: " << p << "\n";
-	cout << "q: " << q << "\n";
-	cout << "public key - e: " << e << "\n";
-	cout << "private key - d: " << d << "\n";
-	cout << "n: " << n << "\n";
-
-	ZZ m = RandomBnd(min(p,q));
+	// cout << "p: " << p << "\n";
+	// cout << "q: " << q << "\n";
+	// cout << "public key - e: " << e << "\n";
+	// cout << "private key - d: " << d << "\n";
+	// cout << "n: " << n << "\n";
+    string my_m;
+    cin >> my_m;
+    
+	ZZ m(NTL::INIT_VAL, my_m.c_str());;
 	cout << "m: " << m << endl;
 	ZZ c = rsa_gen->encrypt(m);
-	cout << "Encrypt:" << c << "\n";
-	cout << "Decrypt:" << rsa_gen->decrypt(c) << "\n";
-
+    ZZ text_descrypt = rsa_gen->decrypt(c);
+	// cout << "Encrypt:" << c << "\n";
+	// cout << "Decrypt:" << text_descrypt << "\n";
+    cout << "Message:" << convertString(text_descrypt) << "\n";
 	return 0;
 }
 
