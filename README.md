@@ -58,20 +58,30 @@ Note: Since 4 attack methods are set up such as:
 * Fermat Attack (p,q close: abs(p - q) < n^1/4)
 * Broadcast Attack (same e, diff n, c)
 
-But the way they work is the same, we only need to take an example set up for one attack. Ex: external Attack
-#### Input file (write in genText/text.txt):
-     
-#### Run thourgh makefile:
-     make message
-#### Output has some information such as (print in commandline):
-     - message read from input
-     - message decrypt
+But the way they work is the same, we only need to take an example set up for one attack. Ex: broadcast Attack
+#### Input file (write in attackMethod/testcase):
+     - externalAttack (5 lines: n, e1, e2, c1, c2)
+     - internalAttack (3 lines: n,e,d)
+     - broadcastAttack (7 lines: e, n1, n2, n3, c1, c2, c3 - save in crt.txt)
+     - fermatAttack (1 lines: n)
+#### Run thourgh makefile (Makefile in folder attackMethod):
+     cd attackMethod
+     make broadcastAttack
+#### Output has some information such as (write in attackMethod/result folder):
+     - Fields have been decrypted depending on attack needs
+     - Some attack such as (broadcast attack run readM_e.py same folder to get final result)
 #### File source:
 ```bash
-── genText
-    └──asciiToText.py
-    └──res.txt
-    └──text.txt
-── Makefile
-── message.cpp
+── attackMethod
+    └──result
+          ├── broadcastAttack.txt
+          ├── readM_e.py
+          ...
+    └──testcase
+          ├── crt.txt
+          ...
+    └──Makefile
+    └──broadcastAttack.cpp
+    ...
+── rsa_attack.hpp
 ```
