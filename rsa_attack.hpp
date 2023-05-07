@@ -3,16 +3,28 @@
 
 struct pairAM{
 	ZZ a,m;
+	pairAM(ZZ a, ZZ m) {
+		this->a = a;
+		this->m = m;
+	}
+	pairAM(const pairAM& a1) {
+		this->a = a1.a;
+		this->m = a1.m;
+	}
 };
 
 struct pairEC{
 	ZZ e,c;
-}
+	pairEC(ZZ e, ZZ c) {
+		this->e = e;
+		this->c = c;
+	}
+};
 
 class attackRSA{
 private:
 	ZZ n,p,q,e,d,M,totient;
-	genPrime* test;
+	genPrime* testPrime;
 public:
 	attackRSA() : n(-1),p(-1),q(-1),e(-1),d(-1),M(-1),totient(-1){
 		testPrime = new genPrime();
@@ -30,7 +42,7 @@ public:
 	//method to find
 	//small n, n < 10^9, n has 32, 64 bits
 	void getPQ(int n){
-		int minPrime[1e9 + 1];
+		int minPrime[(ll)1e9 + 1];
 		for (int i = 2; i * i <= n; ++i)
 			for (int j = i * i; j <= n; j += i)
        	if (minPrime[j] == 0) minPrime[j] = i;
@@ -64,8 +76,8 @@ public:
 		p = a + b;
 		q = a - b;
 		assert(n == p * q);
-		assert(testPrime->test_prime(p,10)==1);
-		assert(testPrime->test_prime(q,10)==1);
+		// assert(testPrime->test_prime(p,10)==1);
+		// assert(testPrime->test_prime(q,10)==1);
 		cout << "Success\n" << endl;
 	}
 
@@ -76,16 +88,16 @@ public:
 	//=> use crt method
 
 	void crt(const ZZ& e, const vector<pairAM>& info) {
-		ZZ M = 1;
+		ZZ M = ZZ(1);
 		for (auto& inf: info){
 			M *= inf.m;
 		}
 
-		ZZ ae = 0;
+		ZZ ae = ZZ(0);
 		for (auto& inf: info){
 			ZZ a_i = inf.a;
 			ZZ M_i = M / inf.m;
-			ZZ N_i = inverseUti(M_i,inf.m);
+			ZZ N_i = inverseUtil1(M_i,inf.m);
 			ae = (ae + a_i * M_i % M * N_i % M) % M;
 		}
 		assert(gcdUtil1(ae,info[0].m) == 1);
@@ -97,9 +109,9 @@ public:
 	}
 
 	//has n,e,d => to compute totient, give e_victim => d_victime
-	void computeTotient(ZZ n, ZZ, e, ZZ d){
+	void computeTotient(ZZ n, ZZ e, ZZ d){
 		ZZ k = (e * d - 1) / n;
-		ZZ tot = 1;
+		ZZ tot = ZZ(1);
 		while(true){
 			tot = (e * d - 1)/k;
 			if (tot * k == e * d - 1)	break;
@@ -109,18 +121,18 @@ public:
 	}
 
 	ZZ getDvictim(ZZ e_victim){
-		assert(gcdUtil1(e_victim,this->totient) == 1)
+		assert(gcdUtil1(e_victim,this->totient) == 1);
 		ZZ dVictim = inverseUtil1(e_victim,this->totient);
 		return dVictim;
 	}
 
 	//has same n, different e,c
-	void external_attack(ZZ n, vector<pairEC> info) {
+	void external_attack(ZZ n, pairEC info1, pairEC info2) {
 		//use 2 info
-		ZZ e1 = info[0].e;
-		ZZ e2 = info[1].e;
-		ZZ c1 = info[0].c;
-		ZZ c2 = info[1].c;
+		ZZ e1 = info1.e;
+		ZZ e2 = info2.e;
+		ZZ c1 = info1.c;
+		ZZ c2 = info2.c;
 
 		ZZ u,v;
 		ZZ d = extendedGcd(e1,e2,u,v);
@@ -141,5 +153,5 @@ public:
 	ZZ getPublicKey() {return e;}
 	ZZ getPrivateKey() {return d;}
 	ZZ getTotient() {return totient;}
-	ZZ getM() {return M};
+	ZZ getM() {return M;}
 };

@@ -1,9 +1,30 @@
 #include <NTL/ZZ.h>
 #include <bits/stdc++.h>
 #include <cassert>
+#include <cstring>
+#include <sstream>
 
 using namespace std;
 using namespace NTL;
+
+std::string zToString(const ZZ &z) {
+	cout << "bugs" << endl;
+    std::stringstream buffer;
+    buffer << z;
+    return buffer.str();
+}
+
+struct ZZHash {
+    size_t operator()(const NTL::ZZ& key) const {
+        return std::hash<std::string>()(zToString(key));
+    }
+};
+
+struct ZZEqual {
+    bool operator()(const NTL::ZZ& lhs, const NTL::ZZ& rhs) const {
+        return lhs == rhs;
+    }
+};
 
 ZZ gcdUtil1(ZZ a, ZZ b) {
 	while (b != 0) {
@@ -64,10 +85,11 @@ ZZ square_root(ZZ n) {
 	ZZ x = n;
 	ZZ y = (x + n/x)/2;
 	while (y < x) {
-		x = n;
+		x = y;
 		y = (x + n/x)/2;
+		// cout << x << " " << y << endl;
 	}
-	return n;
+	return x;
 }
 
 //O(sqrt(M))
@@ -75,20 +97,20 @@ ZZ discreteLog(ZZ a,ZZ b,ZZ m){
 		a %= m;
 		b %= m;
 
-		ZZ n = sqrt(m) + 1;
-		ZZ an = modPowUtil1(a,n,m);
-		unordered_map<ZZ,ZZ>vals;
-		for (ZZ q = 0, cur = b; q <= n; ++q){
+		ZZ n = square_root(m) +ZZ(1);
+		ZZ an = modpowUtil1(a,n,m);
+		unordered_map<ZZ,ZZ,ZZHash, ZZEqual>vals;
+		for (ZZ q = ZZ(0), cur = b; q <= n; ++q){
 			vals[cur] = q;
 			cur = (cur * a) % m;
 		}
 
-		for (ZZ p = 1, cur = 1; p <= n; ++p){
+		for (ZZ p = ZZ(1), cur = ZZ(1); p <= n; ++p){
 			cur = (cur * an) % m;
 			if (vals.count(cur)) {
 				ZZ ans = n * p - vals[cur];
 				return ans;
 			}
 		}
-		return -1;
+		return ZZ(-1);
 }

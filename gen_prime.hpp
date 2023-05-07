@@ -41,7 +41,11 @@ public:
 	}
 
 	bool test_prime(const ZZ& gen,int n_iter = 100) {
-		for (ZZ& p : primes) if (gen != p && gen % p == 0) return false;
+		for (ZZ& p : primes) {
+			if (gen != p && gen % p == 0) {	
+				return false;
+			}
+		}
 		//decompose gen
 		int s = 0;
 		ZZ d = gen - ZZ(1);
@@ -52,8 +56,11 @@ public:
 			//cout << "<<<<<>>>>>" << endl;
 		}
 		//cout << "<<>>" << endl;
-		for (int i = 0; i < n_iter; ++i)
-			if (!rabin_miller(gen,s,d)) return false;
+		for (int i = 0; i < n_iter; ++i){
+			if (!rabin_miller(gen,s,d)) {
+			 	return false;
+			}
+		}
 		return true;
 	}
 
