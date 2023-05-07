@@ -1,4 +1,4 @@
-#include "rsa_attack.hpp"
+#include "../rsa_attack.hpp"
 #include <bits/stdc++.h>
 #include <cassert>
 #include <NTL/ZZ.h>
@@ -9,6 +9,7 @@ using namespace std;
 int main() {
     //fermat attack
     attackRSA* attacker = new attackRSA();
+    cout <<"here" << endl;
     FILE* f1 = freopen("testcase/fermatAttack.txt","r",stdin);
     FILE* f2 = freopen("result/fermatAttack.txt","w",stdout);
     string n;

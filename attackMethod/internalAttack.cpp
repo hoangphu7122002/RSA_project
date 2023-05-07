@@ -1,4 +1,4 @@
-#include "rsa_attack.hpp"
+#include "../rsa_attack.hpp"
 #include <bits/stdc++.h>
 #include <cassert>
 #include <NTL/ZZ.h>
