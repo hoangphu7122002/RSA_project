@@ -7,7 +7,6 @@ using namespace NTL;
 using namespace std;
 
 int main() {
-    //fermat attack
     attackRSA* attacker = new attackRSA();
     cout <<"here" << endl;
     FILE* f1 = freopen("testcase/fermatAttack.txt","r",stdin);

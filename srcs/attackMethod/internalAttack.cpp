@@ -1,16 +1,17 @@
-#include "../rsa_attack.hpp"
-#include <bits/stdc++.h>
-#include <cassert>
 #include <NTL/ZZ.h>
+#include <bits/stdc++.h>
+
+#include <cassert>
+
+#include "../rsa_attack.hpp"
 
 using namespace NTL;
 using namespace std;
 
 int main() {
-    //fermat attack
     attackRSA* attacker = new attackRSA();
-    FILE* f1 = freopen("testcase/internalAttack.txt","r",stdin);
-    FILE* f2 = freopen("result/internalAttack.txt","w",stdout);
+    FILE* f1 = freopen("testcase/internalAttack.txt", "r", stdin);
+    FILE* f2 = freopen("result/internalAttack.txt", "w", stdout);
     string n;
     cin >> n;
     string e;
@@ -25,7 +26,7 @@ int main() {
     ZZ my_d(NTL::INIT_VAL, d.c_str());
     ZZ my_e_victim(NTL::INIT_VAL, e_victim.c_str());
 
-    attacker->computeTotient(my_n,my_e,my_d);
+    attacker->computeTotient(my_n, my_e, my_d);
     ZZ d_victim = attacker->getDvictim(my_e_victim);
     cout << "e_victim: " << my_e_victim << endl;
     cout << "d_victim: " << d_victim << endl;
